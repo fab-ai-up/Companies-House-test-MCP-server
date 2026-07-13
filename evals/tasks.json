@@ -1,0 +1,35 @@
+[
+  {
+    "id": "profile-active",
+    "task": "Look up Companies House company number 15246704 and tell me its status (active/dissolved/etc) and the name of its director.",
+    "type": "verifiable",
+    "must_contain_any": ["active", "dissolved"],
+    "must_contain_all": ["Margaroli"],
+    "expected_tools_include": ["get_company_profile"]
+  },
+  {
+    "id": "search-by-name",
+    "task": "Search Companies House for companies with 'Wanderist' in the name and list the ones that are currently active.",
+    "type": "verifiable",
+    "expected_tools_include": ["search_companies"]
+  },
+  {
+    "id": "director-portfolio",
+    "task": "For the director of Companies House company 15246704, list ALL other companies they are or have been a director of.",
+    "type": "verifiable",
+    "expected_tools_include": ["get_company_officers", "get_officer_appointments"]
+  },
+  {
+    "id": "filing-summary",
+    "task": "Summarise the most recent filing activity for Companies House company 15246704 — what filings have been made in the last year and what do they suggest about the company's trajectory?",
+    "type": "judged",
+    "rubric": "Should list recent filings including the DS01 (strike-off application) filed 2026, mention accounts filed 2026 with extended period, and identify that the company is being voluntarily dissolved."
+  },
+  {
+    "id": "graceful-not-found",
+    "task": "Look up Companies House company number 99999999 (this is a fake number).",
+    "type": "verifiable",
+    "must_contain_any": ["not found", "does not exist", "no such", "cannot find", "couldn't find"],
+    "expected_tools_include": ["get_company_profile"]
+  }
+]
