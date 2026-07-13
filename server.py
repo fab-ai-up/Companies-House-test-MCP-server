@@ -827,9 +827,5 @@ async def list_psc_notifications(company_number: str, psc_id: str) -> dict:
 
 
 if __name__ == "__main__":
-    # For local desktop use (Claude Desktop launching via subprocess), swap to:
-    #     mcp.run(transport="stdio")
-    # For remote hosting (Railway, Fly, etc.), use Streamable HTTP:
-    mcp.settings.host = "0.0.0.0"
-    mcp.settings.port = int(os.environ.get("PORT", 8000))
-    mcp.run(transport="streamable-http")
+    #mcp.run(transport="stdio")  # if local
+    mcp.run(transport="streamable-http", host="0.0.0.0", port=8080) # if want to r
