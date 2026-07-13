@@ -827,6 +827,13 @@ async def list_psc_notifications(company_number: str, psc_id: str) -> dict:
 
 
 if __name__ == "__main__":
+    import os
     mcp.settings.host = "0.0.0.0"
     mcp.settings.port = int(os.environ.get("PORT", 8000))
+
+    # FastMCP's Streamable HTTP transport rejects unknown Host headers by
+    # default (DNS rebinding protection). Behind a hosting proxy like
+    # Railway, disable that check.
+    mcp.settings.streamable_http_dns_rebinding_protection = False
+
     mcp.run(transport="streamable-http")
